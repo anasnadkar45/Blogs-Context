@@ -1,24 +1,38 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
-function AppContextProvider({children}){
-    const[loading,setLoading] = (false)
+
+export default function AppContextProvider({children}){
+    // const[loading,setLoading] = (false)
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(null)
     const [posts, setPosts] = useState([])
+    const url = `https://codehelp-apis.vercel.app/api/get-blogs?page=${page}`;
+
+    const fetchData = async() => {
+        const response =await fetch(url)
+        const data = await response.json();
+        setPosts(data.posts);
+        setTotalPages(data.totalPages);
+        console.log(data)
+        console.log(data.totalPages)
+    }
 
     const value = {
         page,
         setPage,
-        loading,
-        setLoading,
+        // loading,
+        // setLoading,
         posts,
         setPosts,
         setPage,
         totalPages,
-        setTotalPages
+        setTotalPages,
+        fetchData
     }
+
+    
 
     return <AppContext.Provider value={value}>
         {children}

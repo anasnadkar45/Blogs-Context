@@ -20,18 +20,24 @@ function BlogPosts() {
             }
 
             <div>
-                {
-                    page > 1 && (
-                        <button onClick={() => setPage(page - 1)}>previous</button>
-                    )
-                }
-                {
-                    page < totalPages && (
-                        <button onClick={() => setPage(page + 1)}>next</button>
-                    )
-                }
+                <div>
+                    {
+                        page > 1 && (
+                            <button onClick={() => setPage(page - 1)}>previous</button>
+                        )
+                    }
+                    {
+                        page < totalPages && (
+                            <button onClick={() => setPage(page + 1)}>next</button>
+                        )
+                    }
 
+                </div>
+                <div>
+                    <p>page {page} of {totalPages}</p>
+                </div>
             </div>
+
         </div>
 
     )
